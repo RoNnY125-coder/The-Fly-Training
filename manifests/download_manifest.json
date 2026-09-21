@@ -1,0 +1,38 @@
+{
+  "dataset": "FlyWire FAFB v783 (Codex export)",
+  "verified_at_utc": "2026-09-17T05:36:51.414702+00:00",
+  "source": "https://codex.flywire.ai/api/download?dataset=fafb (manual, signed-in download)",
+  "license": "CC BY-NC 4.0 (non-commercial, attribution required)",
+  "citations": [
+    "Dorkenwald, S. et al. Neuronal wiring diagram of an adult brain. Nature 634, 124-138 (2024).",
+    "Schlegel, P. et al. Whole-brain annotation and multi-connectome cell typing of Drosophila. Nature 634, 139-152 (2024).",
+    "Eckstein, N. et al. Neurotransmitter classification from electron microscopy images at synaptic sites in Drosophila melanogaster. Cell 187(10), 2574-2594 (2024)."
+  ],
+  "files": [
+    {
+      "filename": "connections.csv.gz",
+      "size_bytes": 68456801,
+      "sha256": "cdc17b160305a55df0d4d96870d8ffa524cefb26cdb137bcb5200ad659a835c6"
+    },
+    {
+      "filename": "classification.csv.gz",
+      "size_bytes": 1711625,
+      "sha256": "448b24195e72e1ed77954466a854a43d1013814b0b00bd1a5d0e2555bf8285f5"
+    },
+    {
+      "filename": "cell_types.csv.gz",
+      "size_bytes": 901707,
+      "sha256": "8aba246d71dc40361677493629972ce3883048c3d02010adc42bda22962a1a2d"
+    },
+    {
+      "filename": "neurotransmitter_types.csv.gz",
+      "size_bytes": 1679884,
+      "sha256": "6a6b3759e635f0f35a677d169052362131ec61d95f55919298b55c43fce4e719"
+    },
+    {
+      "filename": "coordinates.csv.gz",
+      "size_bytes": 5314546,
+      "sha256": "14337121f451f98c2576cee72c24409ada5aaf7948b7c7ca8de9040296840e05"
+    }
+  ]
+}
