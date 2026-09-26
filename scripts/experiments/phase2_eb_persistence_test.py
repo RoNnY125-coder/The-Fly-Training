@@ -34,7 +34,10 @@ PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 FIGURES_DIR = PROJECT_ROOT / "figures"
 
 SCALE_EXC = 0.003
-SCALE_INH = 0.02
+SCALE_INH = 0.002         # UPDATED: Phase 3 found default (0.02) suppresses
+                          # ~80% of EB, and reducing inhibition let real
+                          # wiring beat shuffled controls on localization.
+                          # Retesting persistence under this corrected regime.
 TAU_SYN = 5.0
 REFRACTORY = 2.0
 
@@ -42,7 +45,11 @@ N_STEPS = 400
 INPUT_ON_UNTIL = 200        # input is removed at this step
 TRUE_HEADING = np.pi / 2
 INPUT_STRENGTH = 1.5
-EB_BASELINE_DRIVE = 0.15   # same fix used for PB in Phase 1 -- a stand-in for
+EB_BASELINE_DRIVE = 0.15
+PB_BASELINE_DRIVE = 0.15  # NEW: give PB the same baseline support, so it can
+                          # actually participate in feedback to EB, instead
+                          # of sitting silent with no drive at all -- tests
+                          # whether the sustaining loop needs PB active   # same fix used for PB in Phase 1 -- a stand-in for
                            # excitatory drive EB would get in vivo from parts
                            # of the brain we excluded. Tests whether EB's
                            # earlier near-total silence after input removal
@@ -73,7 +80,9 @@ def main():
     coord_lookup = dict(zip(coords["root_id"], coords["xyz"]))
 
     eb_mask = regions == "EB (ring/visual input)"
+    pb_mask = regions == "PB (heading)"
     eb_indices = np.nonzero(eb_mask)[0]
+    pb_indices = np.nonzero(pb_mask)[0]
 
     eb_pts, eb_valid_idx = [], []
     for idx in eb_indices:
@@ -99,6 +108,7 @@ def main():
     for t in range(N_STEPS):
         ext = np.zeros(n, dtype=np.float32)
         ext[eb_valid_idx] = EB_BASELINE_DRIVE  # constant baseline, always on
+        ext[pb_indices] = PB_BASELINE_DRIVE    # NEW: PB baseline, always on too
         if t < INPUT_ON_UNTIL:
             tuning = np.cos(TRUE_HEADING - eb_angle_full[eb_valid_idx])
             tuning = np.clip(tuning, 0, None)
